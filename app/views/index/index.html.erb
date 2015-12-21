@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Bootstrap, CSS, and stylesheet-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="RUDownTeam">
+  <title>RUDown</title>
+  <%- stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" %>
+    <%- stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cyborg/bootstrap.min.css" %>
+      <%=stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" %>
+        <%=stylesheet_link_tag "style" %>
+</head>
+
+<body>
+<div class="container">
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" data-toggle="tab" href="#home">RUDown</a>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li class="active tab">
+              <a data-toggle="tab" href="#home" class="">Home</a>
+            </li>
+            <li class="tab">
+              <a id="createEventLink" data-toggle="tab" href="#createEvents" class="">Create Event</a>
+            </li>
+            <li class="tab">
+              <a data-toggle="tab" href="#myRequests" class="">My Requests</a>
+            </li>
+            <li class="tab">
+              <a data-toggle="tab" href="#myEvents" class="">My Events</a>
+            </li>
+            <li class="tab">
+              <a data-toggle="tab" href="#editEvents" class="" id='edit-tab'>Edit Events</a>
+            </li>
+          </ul>
+          
+           <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <div class="btn-group show-on-hover pull-right">
+                <div class="well well-sm pull-right dropdown-toggle">
+                  <a class="pull-right" href="#">
+                    <h5 class="pull-right"> <%= current_user.name %> </h5>
+                    <img class="media-object profile-name img-circle" src= <%="https://graph.facebook.com/" + current_user.uid + "/picture?type=small" %> >
+                  </a>
+                </div>
+                <ul class="dropdown-menu" role="menu" id="settings-dropdown">
+                  <li><a href="settings/">Settings</a></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%=link_to "Sign out", signout_path, id: "sign_out" %>
+                  </li>
+                </ul>
+              </div>
+              <% end %>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    <div class="tab-content">
+      <div id="home" class="tab-pane fadeIn active">
+        <a name="home"></a>
+        <h3>Events going on:</h3>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sort by
+            <span class="caret"></span>
+          </button>
+         
+        </div>
+        <a id="refresh" href="/" class="btn btn-default"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
+        <% if flash[:notice] %>
+          <div class="notice">
+            <span id="flash"><%= flash[:notice] %></span>
+          </div>
+          <% end %>
+            <br></br>
+            <div id="events">
+              <%=render @events %>
+            </div>
+            <%=will_paginate @events %>
+      </div>
+      
+      <div id="createEvents" class="tab-pane fade">
+        <a name="createEvents"></a>
+        <h3>Create Event</h3>
+        <p>Enter new event information here:</p>
+          <div>
+          <%=render partial: 'inputform', locals: {eventedit: nil} %>
+        </div>
+      </div>
+      
+      <div id="myRequests" class="tab-pane fade">
+       <h3>My Requests</h3>
+        <div id="requests">
+          <%=render @requests %>
+        </div>
+        <%=will_paginate @requests %>
+      </div>
+      
+      <div id="myEvents" class="tab-pane fade">
+        <h3>My Events</h3>
+        <div id="myevents">
+          <%=render @myevents %>
+        </div>
+        <%=will_paginate @myevents %>
+      </div>
+      
+      <div id="editEvents" class='tab-pane fade'>
+        <a name="editEvents"></a>
+        <h3>Edit Event</h3>
+        <p>Enter new event information here:</p>
+        <div>
+          <%=render partial: 'inputform', locals: {eventedit: @eventedit} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+ <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="https://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  <script>
+    $(function() {
+      var hash = window.location.hash;
+      hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+    });
+
+    $('.notice').hide().delay(800).fadeIn(800).delay(2000).fadeOut(800)
+    
+    $('#edit-tab').hide()
+  </script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <!-- Bootstrap, CSS, and stylesheet-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="RUDownTeam">
+  <title>RUDown - Settings</title>
+    <%- stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" %>
+
+    <!-- Bootswatch Themes http://www.bootstrapcdn.com/bootswatch -->
+    <!-- Cyborg -->
+    <%- stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cyborg/bootstrap.min.css" %>
+      <!-- Yeti-->
+      <%=stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" %>
+
+        <!-- Custom styles -->
+        <%=stylesheet_link_tag "style" %>
+</head>
+<body>
+<div class ="container">
+      <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" data-toggle="tab" href="/home/index">RUDown</a>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li class="active tab">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <div class="btn-group show-on-hover pull-right">
+                <div class="well well-sm pull-right dropdown-toggle">
+                  <a class="pull-right" href="#">
+                    <h5 class="pull-right"> <%= current_user.name %> </h5>
+                    <img class="media-object profile-name img-circle" src= <%="https://graph.facebook.com/" + current_user.uid + "/picture?type=small" %> >
+                  </a>
+                </div>
+                <ul class="dropdown-menu" role="menu" id="settings-dropdown">
+                  <li><a href="/index/index">Home</a></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%=link_to "Sign out", signout_path, id: "sign_out" %>
+                  </li>
+                </ul>
+              </div>
+              <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</div>
+</body>
+</html>

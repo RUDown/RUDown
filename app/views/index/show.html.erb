@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Facebook Auth Example</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <!-- Latest compiled and minified CSS -->
+  <%= stylesheet_link_tag  "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" %>
+</head>
+<body>
+<div>
+  <% if current_user %>
+    <script type="text/javascript">
+        window.location.href="/index/index"  
+    </script>
+  <% else %>
+  <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>R U Down</h1>
+                        <hr class="intro-divider">
+                            <%= link_to '<i class="fa fa-facebook-official"></i>Sign in with Facebook'.html_safe, "/auth/facebook", id: "sign_in", class: "btn btn-primary btn-large"%>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  <% end %>
+</div>
+<%= yield %>
+
+
+
+
+<div class="container" style="visibility: hidden">
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" data-toggle="tab" href="#home">RUDown</a>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            <li class="active tab">
+              <a data-toggle="tab" href="#home" class="">Home</a>
+            </li>
+            <li class="tab">
+              <a id="createEventLink" data-toggle="tab" href="#createEvents" class="">Create Event</a>
+            </li>
+            <li class="tab">
+              <a data-toggle="tab" href="#myRequests" class="">My Requests</a>
+            </li>
+            <li class="tab">
+              <a data-toggle="tab" href="#myEvents" class="">My Events</a>
+            </li>
+            <li class="tab">
+              <a data-toggle="tab" href="#editEvents" class="" id='edit-tab'>Edit Events</a>
+            </li>
+          </ul>
+          
+           <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <div class="btn-group show-on-hover pull-right">
+                <div class="well well-sm pull-right dropdown-toggle">
+                  <a class="pull-right" href="#">
+                    <h5 class="pull-right"> <%= current_user.name %> </h5>
+                    <img class="media-object profile-name img-circle" src= <%="https://graph.facebook.com/" + current_user.uid + "/picture?type=small" %> >
+                  </a>
+                </div>
+                <ul class="dropdown-menu" role="menu" id="settings-dropdown">
+                  <li><a href="settings/">Settings</a></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%=link_to "Sign out", signout_path, id: "sign_out" %>
+                  </li>
+                </ul>
+              </div>
+              <% end %>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    <div class="tab-content">
+      <div id="home" class="tab-pane fadeIn active">
+        <a name="home"></a>
+        <h3>Events going on:</h3>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sort by
+            <span class="caret"></span>
+          </button>
+         
+        </div>
+        <a id="refresh" href="/" class="btn btn-default"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
+        <% if flash[:notice] %>
+          <div class="notice">
+            <span id="flash"><%= flash[:notice] %></span>
+          </div>
+          <% end %>
+            <br></br>
+            <div id="events">
+            </div>
+      </div>
+      
+      <div id="createEvents" class="tab-pane fade">
+        <a name="createEvents"></a>
+        <h3>Create Event</h3>
+        <p>Enter new event information here:</p>
+          <div>
+        </div>
+      </div>
+      
+      <div id="myRequests" class="tab-pane fade">
+       <h3>My Requests</h3>
+        <div id="requests">
+        </div>
+      </div>
+      
+      <div id="myEvents" class="tab-pane fade">
+        <h3>My Events</h3>
+        <div id="myevents">
+        </div>
+      </div>
+      
+      <div id="editEvents" class='tab-pane fade'>
+        <a name="editEvents"></a>
+        <h3>Edit Event</h3>
+        <p>Enter new event information here:</p>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+</body>
+</html>

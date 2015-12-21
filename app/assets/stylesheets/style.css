@@ -1,0 +1,61 @@
+.thumbnail .post-image {
+    width: 75px;
+    margin-left: 0;
+    display: inline;
+}
+.thumbnail h3 {
+    display: inline;
+}
+div.well {
+    margin: 0;
+    padding: 0;
+    height: 45px;
+    background-color: #008cba;
+    border-color: #008cba;
+}
+div.well:hover {
+    background-color: #006e92;
+    border-color: #006e92;
+}
+h5 {
+    /*margin-top: 1px;*/
+    margin-right: 2vw;
+    font-weight: bold;
+    color: black;
+}
+.profile-name { 
+    width: 35px;
+    margin-top: 2px;
+    margin-right: 8vw;
+    border: 1px solid #fff;
+    transition: all 0.2s ease-in-out;
+}
+.img-circle{
+    margin-left: 0.5vw;
+}
+.profile-name:hover {
+    /*border: 1px solid #fff;*/
+    /*transform:rotate(360deg);*/
+    /*    -ms-transform:rotate(360deg);  */
+    /*    -webkit-transform:rotate(360deg);  */
+    /*    -webkit-font-smoothing:antialiased;*/
+}
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+body{
+    background-color: #f2f2f2;
+}
+.notice{
+    text-align: center;
+}
+#flash{
+    background-color: #008cba;
+    color:white;
+}
+
+.event-btn{
+    margin: 10px 30px;
+}
+

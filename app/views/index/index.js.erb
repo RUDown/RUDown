@@ -1,0 +1,5 @@
+$('#events').append('<%= escape_javascript render(@events) %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@events) %>')
+
+$('#myevents').append('<%= escape_javascript render(@myevents) %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@myevents) %>')
