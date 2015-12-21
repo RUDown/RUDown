@@ -120,6 +120,7 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    pg (0.18.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -222,6 +223,7 @@ DEPENDENCIES
   jquery-rails
   omniauth
   omniauth-facebook
+  pg
   rails (= 4.2.4)
   rspec-rails
   sass-rails (~> 5.0)

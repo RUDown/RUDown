@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -35,7 +34,7 @@ gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-    gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   
@@ -43,6 +42,8 @@ group :development, :test do
   
   gem 'byebug'
   gem 'capybara'
+  
+  gem 'sqlite3'
 end
 
 gem 'omniauth'
@@ -58,3 +59,6 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem 'pg'
+end

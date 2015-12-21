@@ -124,11 +124,32 @@ RSpec.describe IndexController, type: :controller do
     end
     
     describe "POST makerequest" do
+        before(:each) do
+            user = User.create!(
+                provider: 'Facebook',
+                name: 'test_user',
+                uid: 12345)
+            event = Event.create!(
+                    title: 'testevent', 
+                    location: 'here',
+                    time: '',
+                    authorID: user.uid,
+                    datetime: '')
+            user2 = User.create!(
+                    provider: 'Facebook',
+                    name: 'test_user2',
+                    uid: 54321)
+            Event.find(user.uid).users.push(user2)
+        end
         
+        it 'redirects to index' do
+           post :change, :title => 'testevent', :location => 'here', :time => '', :date =>  '', :eid => 1
+           expect(response).to redirect_to('/index/index')
+       end
     end
     
     describe "DELETE deleteRequest" do
-        
+        #Event.find(params[:id]).users.delete(current_user)
     end
 
 end
